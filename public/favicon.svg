@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="7" fill="#141210"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" stroke="#D4A855" stroke-opacity="0.35"/>
+  <text
+    x="16"
+    y="21"
+    fill="#EBE6DF"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="13"
+    font-weight="600"
+    text-anchor="middle"
+  >MS</text>
+</svg>
