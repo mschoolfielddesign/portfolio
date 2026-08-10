@@ -49,7 +49,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            className="flex justify-center mb-12"
           >
             <ObfuscatedEmailLink
               aria-label="Send email to Matt Schoolfield"
@@ -59,12 +59,6 @@ const Contact = () => {
               Send Me an Email
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </ObfuscatedEmailLink>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-border text-foreground font-body font-medium rounded-lg hover:border-accent/50 hover:bg-accent/5 transition-all duration-300"
-            >
-              Download Resume
-            </a>
           </motion.div>
 
           <motion.div
