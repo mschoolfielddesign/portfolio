@@ -3,8 +3,8 @@ import { ArrowDown, MapPin } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen bg-hero flex items-center justify-center relative overflow-hidden">
-      <div className="container px-6 relative z-10">
+    <section className="min-h-svh bg-hero flex flex-col relative overflow-hidden pt-24 pb-16">
+      <div className="container px-6 relative z-10 my-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -15,7 +15,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-flex items-center gap-2 bg-foreground/10 text-foreground/80 px-4 py-2 rounded-full mb-8 border border-foreground/10"
+            className="inline-flex items-center gap-2 bg-foreground/10 text-foreground/80 px-4 py-2 rounded-full mb-6 sm:mb-8 border border-foreground/10"
           >
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
             <span className="text-sm font-medium font-body tracking-wide">
@@ -43,7 +43,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="font-body text-base text-foreground/50 max-w-xl mx-auto mb-10"
+            className="font-body text-base text-foreground/50 max-w-xl mx-auto mb-8 sm:mb-10"
           >
             Currently designing clinical trial solutions that accelerate
             life-saving treatments at Medable
@@ -73,7 +73,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7, duration: 0.6 }}
-            className="flex items-center justify-center gap-2 mt-12 text-foreground/50"
+            className="flex items-center justify-center gap-2 mt-8 sm:mt-12 text-foreground/50"
           >
             <MapPin className="w-4 h-4" />
             <span className="font-body text-sm">Hawaii, USA • Remote</span>
