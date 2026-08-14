@@ -29,7 +29,6 @@ const beforeItems = [
   "Icons at inconsistent weights and sizes across components",
   "Hardcoded color values scattered across 11 components",
   "No visual regression testing. Drift caught only by eye",
-  "Stale CSS and hot-reload failures on cloud-backed filesystems",
 ];
 
 const afterItems = [
@@ -38,7 +37,7 @@ const afterItems = [
   "Heroicons-standard 1.5px strokes, correctly sized at every breakpoint",
   "Semantic token layer as a single source of truth from Figma to CSS",
   "572 pixel-diff baselines in CI across light and dark",
-  "Reliable hot-reload and a durable third-party addon patch",
+  "Durable third-party addon patch",
 ];
 
 const challengeStats = [
@@ -106,7 +105,7 @@ const pillars = [
     points: [
       "572 pixel-diff baselines, light and dark",
       "axe-core WCAG 2.1 AA gate per story, per theme",
-      "Reliable hot-reload on cloud-backed filesystem",
+      "Durable third-party addon patch via patch-package",
     ],
   },
   {
@@ -186,11 +185,6 @@ const tooling = [
     title: "Token Drift Guard",
     description:
       "verify:design-tokens fails if semantic_tokens.ts or styles.css drift from their sources. Wired into CI. Figma stays the single source of truth.",
-  },
-  {
-    title: "Reliable Hot Reload",
-    description:
-      "Webpack polling and in-memory caching eliminated stale-CSS confusion on the cloud-backed filesystem, a persistent pain point that slowed the whole team down.",
   },
   {
     title: "Durable Addon Patch",
