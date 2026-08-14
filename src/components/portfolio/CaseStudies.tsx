@@ -50,14 +50,11 @@ const CaseStudies = () => {
           className="mb-16 md:mb-20"
         >
           <span className="text-accent font-medium tracking-widest uppercase text-sm mb-4 block">
-            Selected Work
+            The Latest
           </span>
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold text-foreground mb-6">
-            Case Studies
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold text-foreground">
+            What I've Been Working On
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl">
-            Designing impactful digital experiences across healthcare, AI, and enterprise platforms
-          </p>
         </motion.div>
 
         <div className="flex flex-col gap-8 md:gap-10 max-w-4xl mx-auto">
