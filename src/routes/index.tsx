@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, Linkedin, Mail, MapPin } from "lucide-react";
 import { Reveal, SectionHeading } from "@/components/portfolio/sections";
 import PortfolioImage from "@/components/PortfolioImage";
 import { SystemsGlyph, WaveField } from "@/components/illustrations";
@@ -279,30 +279,40 @@ function Home() {
       {/* Contact */}
       <section id="contact" className="px-6 pb-28">
         <Reveal className="panel mx-auto max-w-6xl overflow-hidden rounded-3xl px-8 py-16 text-center md:px-16">
-          <span className="mono-label">Hawaii, USA • Remote</span>
+          <span className="mono-label">Get in Touch</span>
           <h2 className="mx-auto mt-6 max-w-2xl text-3xl leading-tight md:text-5xl">
-            Hiring for the hardest surface in your product?
+            Let's create something
+            <span className="text-signal-gradient"> meaningful</span>
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-muted-foreground">
-            Send the messy brief. I'll come back with a systems read and two directions.
+            I'm always interested in discussing healthcare technology, AI interface design, or
+            opportunities to create meaningful impact through design.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <ObfuscatedEmailLink
               aria-label="Send email to Matt Schoolfield"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
             >
               <Mail className="size-4" />
-              Get in touch
+              Send me an email
+              <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </ObfuscatedEmailLink>
+          </div>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
             <a
               href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="inline-flex size-11 items-center justify-center rounded-full border border-border transition-colors hover:border-signal/50 hover:text-signal"
+              className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
             >
               <Linkedin className="size-4" />
+              LinkedIn
             </a>
+            <span className="size-1 rounded-full bg-border" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2">
+              <MapPin className="size-4" />
+              Hawaii, USA • Remote
+            </div>
           </div>
         </Reveal>
       </section>
