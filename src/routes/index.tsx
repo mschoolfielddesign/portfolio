@@ -63,8 +63,8 @@ function Home() {
         style={{ transform: `scaleX(${progress})` }}
       />
 
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl px-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between py-4">
           <a href="#top" className="font-display text-sm font-semibold tracking-tight">
             Matt Schoolfield
             <span className="ml-2 text-signal">/</span>
@@ -252,8 +252,7 @@ function Home() {
             <Reveal delay={120} className="mt-8 flex flex-wrap gap-2">
               {[
                 "Figma",
-                "React",
-                "Tailwind",
+                "Cursor",
                 "Design tokens",
                 "Healthcare AI",
                 "Clinical trials",
@@ -279,7 +278,7 @@ function Home() {
       {/* Contact */}
       <section id="contact" className="px-6 pb-28">
         <Reveal className="panel mx-auto max-w-6xl overflow-hidden rounded-3xl px-8 py-16 text-center md:px-16">
-          <span className="mono-label">Hawaii, USA • Remote</span>
+          <span className="mono-label">Open to senior / staff IC roles • remote</span>
           <h2 className="mx-auto mt-6 max-w-2xl text-3xl leading-tight md:text-5xl">
             Hiring for the hardest surface in your product?
           </h2>

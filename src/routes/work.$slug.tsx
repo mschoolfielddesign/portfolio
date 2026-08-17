@@ -45,8 +45,8 @@ function CaseStudyPage() {
         style={{ transform: `scaleX(${progress})` }}
       />
 
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl px-6">
+        <div className="mx-auto flex max-w-5xl items-center justify-between py-4">
           <Link to="/" className="font-display text-sm font-semibold tracking-tight">
             Matt Schoolfield
             <span className="ml-2 text-signal">/</span>
