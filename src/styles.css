@@ -1,0 +1,221 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system: "Signal" — dark-only, technical, systems-minded portfolio.
+ * All colors are oklch tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-signal: var(--signal);
+  --color-signal-soft: var(--signal-soft);
+  --color-ember: var(--ember);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.16 0.014 250);
+  --foreground: oklch(0.96 0.006 240);
+  --surface: oklch(0.2 0.016 250);
+  --surface-2: oklch(0.24 0.018 250);
+  --card: oklch(0.2 0.016 250);
+  --card-foreground: oklch(0.96 0.006 240);
+  --popover: oklch(0.2 0.016 250);
+  --popover-foreground: oklch(0.96 0.006 240);
+
+  --signal: oklch(0.83 0.16 176);
+  --signal-soft: oklch(0.62 0.11 190);
+  --ember: oklch(0.79 0.15 62);
+
+  --primary: oklch(0.83 0.16 176);
+  --primary-foreground: oklch(0.18 0.02 200);
+  --secondary: oklch(0.26 0.018 250);
+  --secondary-foreground: oklch(0.96 0.006 240);
+  --muted: oklch(0.24 0.015 250);
+  --muted-foreground: oklch(0.7 0.014 245);
+  --accent: oklch(0.28 0.03 200);
+  --accent-foreground: oklch(0.93 0.03 190);
+  --destructive: oklch(0.63 0.2 25);
+  --destructive-foreground: oklch(0.97 0.01 240);
+  --border: oklch(0.3 0.016 250);
+  --input: oklch(0.3 0.016 250);
+  --ring: oklch(0.83 0.16 176);
+
+  --chart-1: oklch(0.83 0.16 176);
+  --chart-2: oklch(0.79 0.15 62);
+  --chart-3: oklch(0.66 0.13 250);
+  --chart-4: oklch(0.72 0.12 320);
+  --chart-5: oklch(0.75 0.14 140);
+
+  --sidebar: oklch(0.2 0.016 250);
+  --sidebar-foreground: oklch(0.96 0.006 240);
+  --sidebar-primary: oklch(0.83 0.16 176);
+  --sidebar-primary-foreground: oklch(0.18 0.02 200);
+  --sidebar-accent: oklch(0.26 0.018 250);
+  --sidebar-accent-foreground: oklch(0.96 0.006 240);
+  --sidebar-border: oklch(0.3 0.016 250);
+  --sidebar-ring: oklch(0.83 0.16 176);
+
+  --gradient-signal: linear-gradient(
+    135deg,
+    var(--signal) 0%,
+    var(--signal-soft) 55%,
+    var(--ember) 130%
+  );
+  --shadow-lift: 0 24px 60px -30px oklch(0 0 0 / 0.85);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--signal) 28%, transparent),
+    0 30px 70px -40px color-mix(in oklab, var(--signal) 55%, transparent);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--signal) 40%, transparent);
+  }
+}
+
+@utility text-signal-gradient {
+  background-image: var(--gradient-signal);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility grid-field {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--border) 65%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--border) 65%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.9s var(--ease-out-soft),
+    transform 0.9s var(--ease-out-soft);
+}
+
+@utility reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@utility panel {
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--surface-2) 85%, transparent),
+    var(--surface)
+  );
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lift);
+}
+
+@utility mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@keyframes pulse-line {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@utility animate-drift {
+  animation: drift 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

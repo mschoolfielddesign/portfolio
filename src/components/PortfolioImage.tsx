@@ -21,7 +21,7 @@ const PortfolioImage = ({
   loading = "lazy",
   sizes = "(min-width: 896px) 800px, calc(100vw - 5rem)",
 }: PortfolioImageProps) => (
-  <div className={cn("aspect-video overflow-hidden bg-secondary/30", className)}>
+  <div className={cn("aspect-video overflow-hidden bg-surface-2/50", className)}>
     <img
       src={src}
       alt={alt}
