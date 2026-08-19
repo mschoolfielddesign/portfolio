@@ -1,9 +1,13 @@
 /** Case study content. `art` maps to an illustration fallback when no hero image is shown. */
 
 import medableAgentStudio from "@/assets/medable-agent-studio.png";
-import medableCraAgent from "@/assets/medable-cra-agent.png";
+import medableAgentStudioScreens from "@/assets/medable-agent-studio-screens.png";
+import medableCraAgentChat from "@/assets/medable-cra-agent-chat.png";
+import medableCraAgentDashboard from "@/assets/medable-cra-agent-dashboard.png";
 import medableDesignSystem from "@/assets/medable-design-system.png";
-import medableDarkModeComparison from "@/assets/medable-dark-mode-comparison.png";
+import medableSignIn from "@/assets/medable-sign-in.png";
+import medableNucleusLightMode from "@/assets/medable-nucleus-light-mode.png";
+import medableNucleusDarkMode from "@/assets/medable-nucleus-dark-mode.png";
 
 export type ArtKey = "flow" | "tokens" | "orbit" | "wave";
 
@@ -29,6 +33,7 @@ export type CaseStudy = {
   metricLabel: string;
   art: ArtKey;
   heroImage: CaseImage;
+  heroSecondaryImage?: CaseImage;
 
   /** Detail page */
   headline: string;
@@ -46,6 +51,7 @@ export type CaseStudy = {
     heading: string;
     blurb: string;
     image?: CaseImage;
+    images?: CaseImage[];
     items?: Group[];
     table?: { columns: string[]; rows: string[][] };
     quote?: { text: string; attribution: string };
@@ -76,6 +82,12 @@ export const CASE_STUDIES: CaseStudy[] = [
       alt: "Agent Studio platform dashboard showing agent builder and monitoring views",
       width: 1024,
       height: 635,
+    },
+    heroSecondaryImage: {
+      src: medableAgentStudioScreens,
+      alt: "Agent Studio interface views including chat, agent library, and visual workflow builder",
+      width: 1024,
+      height: 721,
     },
 
     headline: "Medable Agent Studio",
@@ -150,12 +162,20 @@ export const CASE_STUDIES: CaseStudy[] = [
       heading: "Featured agent: CRA Agent",
       blurb:
         "One of the first agents launched on Agent Studio. The CRA Agent removes bottlenecks in clinical research monitoring by unifying data across multiple systems and surfacing insights automatically.",
-      image: {
-        src: medableCraAgent,
-        alt: "CRA Agent dashboard showing unified enrollment metrics and EDC insights for a clinical trial site",
-        width: 1024,
-        height: 679,
-      },
+      images: [
+        {
+          src: medableCraAgentChat,
+          alt: "Clinical Monitoring Agent chat interface with conversation history and monitoring prompt suggestions",
+          width: 1024,
+          height: 574,
+        },
+        {
+          src: medableCraAgentDashboard,
+          alt: "CRA Agent site dashboard with enrollment tracking, audit readiness, and AI-assisted monitoring insights",
+          width: 1024,
+          height: 576,
+        },
+      ],
       items: [
         {
           t: "Unified data view",
@@ -247,12 +267,26 @@ export const CASE_STUDIES: CaseStudy[] = [
       heading: "Headline work: full dark mode",
       blurb:
         "Dark mode went from broken to production-quality across every component. The solution required a semantic token architecture, not just toggling colors, built around a codified surface elevation model. In light mode, shadows carry depth; in dark mode, shadows disappear, so surfaces must carry it instead.",
-      image: {
-        src: medableDarkModeComparison,
-        alt: "Side-by-side comparison of Nucleus components in light mode and dark mode",
-        width: 1024,
-        height: 432,
-      },
+      images: [
+        {
+          src: medableNucleusLightMode,
+          alt: "Medable platform in light mode showing chat, agents library, and workflow canvas views",
+          width: 1024,
+          height: 715,
+        },
+        {
+          src: medableNucleusDarkMode,
+          alt: "Medable platform in dark mode showing chat, agents library, and workflow canvas views",
+          width: 1024,
+          height: 721,
+        },
+        {
+          src: medableSignIn,
+          alt: "Medable sign in screen using Nucleus design system components in dark mode",
+          width: 1024,
+          height: 635,
+        },
+      ],
       table: {
         columns: ["Level", "Name", "Surface token", "Shadow", "Used for"],
         rows: [

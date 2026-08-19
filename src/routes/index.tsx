@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Linkedin, Mail } from "lucide-react";
 import { Reveal, SectionHeading } from "@/components/portfolio/sections";
+import { SiteHeader } from "@/components/portfolio/site-header";
 import PortfolioImage from "@/components/PortfolioImage";
 import { SystemsGlyph, WaveField } from "@/components/illustrations";
 import { CASE_STUDIES } from "@/data/case-studies";
@@ -63,36 +64,7 @@ function Home() {
         style={{ transform: `scaleX(${progress})` }}
       />
 
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl px-6">
-        <div className="mx-auto flex max-w-6xl items-center justify-between py-4">
-          <a href="#top" className="font-display text-sm font-semibold tracking-tight">
-            Matt Schoolfield
-            <span className="ml-2 text-signal">/</span>
-            <span className="ml-2 text-muted-foreground">Product Designer</span>
-          </a>
-          <nav className="hidden items-center gap-8 md:flex">
-            {[
-              ["Work", "#work"],
-              ["Approach", "#approach"],
-              ["About", "#about"],
-            ].map(([l, h]) => (
-              <a
-                key={l}
-                href={h}
-                className="mono-label transition-colors hover:text-foreground"
-              >
-                {l}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              className="rounded-full border border-signal/40 px-4 py-1.5 text-xs font-semibold text-signal transition-colors hover:bg-signal/10"
-            >
-              Available for work
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader home />
 
       {/* Hero */}
       <section id="top" className="relative px-6 pt-40 pb-28 md:pt-52 md:pb-40">

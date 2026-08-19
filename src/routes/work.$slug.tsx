@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Check, Mail, Minus } from "lucide-react";
 import { Reveal, SectionHeading } from "@/components/portfolio/sections";
+import { SiteHeader } from "@/components/portfolio/site-header";
 import PortfolioImage from "@/components/PortfolioImage";
 import { getCaseStudy } from "@/data/case-studies";
 import { useScrollProgress } from "@/hooks/use-reveal";
@@ -45,23 +46,7 @@ function CaseStudyPage() {
         style={{ transform: `scaleX(${progress})` }}
       />
 
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl px-6">
-        <div className="mx-auto flex max-w-5xl items-center justify-between py-4">
-          <Link to="/" className="font-display text-sm font-semibold tracking-tight">
-            Matt Schoolfield
-            <span className="ml-2 text-signal">/</span>
-            <span className="ml-2 text-muted-foreground">Product Designer</span>
-          </Link>
-          <Link
-            to="/"
-            hash="work"
-            className="mono-label inline-flex items-center gap-2 transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="size-3.5" />
-            All work
-          </Link>
-        </div>
-      </header>
+      <SiteHeader maxWidthClass="max-w-5xl" />
 
       {/* Hero */}
       <section className="relative px-6 pt-36 pb-16 md:pt-44">
@@ -109,6 +94,20 @@ function CaseStudyPage() {
               className="rounded-2xl"
             />
           </Reveal>
+
+          {study.heroSecondaryImage ? (
+            <div className="panel mt-6 overflow-hidden rounded-3xl p-3 md:p-4">
+              <img
+                src={study.heroSecondaryImage.src}
+                alt={study.heroSecondaryImage.alt}
+                width={study.heroSecondaryImage.width}
+                height={study.heroSecondaryImage.height}
+                loading="eager"
+                decoding="async"
+                className="w-full rounded-2xl"
+              />
+            </div>
+          ) : null}
 
           <Reveal delay={120} className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {study.meta.map((m) => (
@@ -181,7 +180,23 @@ function CaseStudyPage() {
               title={study.feature.heading}
               blurb={study.feature.blurb}
             />
-            {study.feature.image ? (
+            {study.feature.images?.length ? (
+              <div className="mt-12 space-y-6">
+                {study.feature.images.map((image) => (
+                  <div key={image.src} className="panel overflow-hidden rounded-2xl p-3 md:p-4">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      width={image.width}
+                      height={image.height}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full rounded-xl"
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : study.feature.image ? (
               <Reveal delay={60} className="panel mt-12 overflow-hidden rounded-2xl p-3 md:p-4">
                 <PortfolioImage
                   src={study.feature.image.src}
