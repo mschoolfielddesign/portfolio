@@ -46,7 +46,7 @@ function CaseStudyPage() {
         style={{ transform: `scaleX(${progress})` }}
       />
 
-      <SiteHeader maxWidthClass="max-w-5xl" />
+      <SiteHeader />
 
       {/* Hero */}
       <section className="relative px-6 pt-36 pb-16 md:pt-44">
@@ -55,7 +55,7 @@ function CaseStudyPage() {
           className="pointer-events-none absolute -top-24 left-1/2 h-[420px] w-[820px] max-w-[130vw] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
           style={{ background: "var(--gradient-signal)" }}
         />
-        <div className="relative mx-auto max-w-5xl">
+        <div className="relative mx-auto max-w-6xl">
           <Reveal>
             <div className="flex items-center gap-3">
               <span className="mono-label text-signal">{study.id}</span>
@@ -123,7 +123,7 @@ function CaseStudyPage() {
       {/* Challenge */}
       {study.challenge ? (
         <section className="px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <SectionHeading
               index="01"
               label="The challenge"
@@ -160,7 +160,7 @@ function CaseStudyPage() {
 
       {/* Stats */}
       <section className="px-6 py-10">
-        <Reveal className="mx-auto grid max-w-5xl gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal className="mx-auto grid max-w-6xl gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {study.stats.map((s) => (
             <div key={s.l} className="bg-surface px-6 py-7">
               <div className="font-display text-3xl text-signal">{s.n}</div>
@@ -173,7 +173,7 @@ function CaseStudyPage() {
       {/* Feature */}
       {study.feature ? (
         <section className="px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <SectionHeading
               index="02"
               label="Headline work"
@@ -271,7 +271,7 @@ function CaseStudyPage() {
       {/* Improvements */}
       {study.improvements ? (
         <section className="relative px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <SectionHeading index="03" label="Detail" title={study.improvements.heading} />
             <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
               {study.improvements.items.map((it, i) => (
@@ -303,7 +303,7 @@ function CaseStudyPage() {
       {/* Contributions */}
       {study.contributions ? (
         <section className="px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <SectionHeading
               index="04"
               label="My work"
@@ -330,7 +330,7 @@ function CaseStudyPage() {
       {/* Process */}
       {study.process ? (
         <section className="px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <SectionHeading index="04" label="Process" title={study.process.heading} />
             <ol className="mt-12 space-y-4">
               {study.process.steps.map((s, i) => (
@@ -374,7 +374,7 @@ function CaseStudyPage() {
       {/* Highlights */}
       {study.highlights ? (
         <section className="px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <SectionHeading index="05" label="Highlights" title={study.highlights.heading} />
             <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {study.highlights.items.map((h, i) => (
@@ -395,7 +395,7 @@ function CaseStudyPage() {
       {/* Impact */}
       {study.impact ? (
         <section className="relative px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <SectionHeading
               index="06"
               label="Results"
@@ -417,7 +417,7 @@ function CaseStudyPage() {
       {/* Next */}
       {study.next ? (
         <section className="px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <SectionHeading
               index="07"
               label="Roadmap"
@@ -439,7 +439,7 @@ function CaseStudyPage() {
       {/* Lessons */}
       {study.lessons ? (
         <section className="relative px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <SectionHeading index="06" label="Reflection" title={study.lessons.heading} />
             <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
               {study.lessons.items.map((l, i) => (
@@ -455,7 +455,7 @@ function CaseStudyPage() {
 
       {/* Contact */}
       <section className="px-6 py-20">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           <Reveal className="panel rounded-3xl px-8 py-14 text-center md:px-16">
             <span className="mono-label">Want to discuss this work?</span>
             <h2 className="mx-auto mt-5 max-w-2xl text-3xl leading-tight md:text-4xl">
@@ -483,7 +483,7 @@ function CaseStudyPage() {
       </section>
 
       <footer className="border-t border-border px-6 py-8">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 text-xs text-muted-foreground sm:flex-row">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 text-xs text-muted-foreground sm:flex-row">
           <span className="font-mono">© 2026 Matt Schoolfield</span>
           <span className="font-mono">Designed and built in the browser</span>
         </div>

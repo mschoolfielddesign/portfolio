@@ -27,8 +27,9 @@ export function SiteHeader({ home = false, maxWidthClass = "max-w-6xl" }: SiteHe
   const href = (id: string) => (home ? `#${id}` : `/#${id}`);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl px-6">
-      <div className={cn("mx-auto flex items-center justify-between py-4", maxWidthClass)}>
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
+      <div className="px-6">
+        <div className={cn("mx-auto flex items-center justify-between py-4", maxWidthClass)}>
         <Link
           to="/"
           className="min-w-0 truncate font-display text-sm font-semibold tracking-tight"
@@ -65,6 +66,7 @@ export function SiteHeader({ home = false, maxWidthClass = "max-w-6xl" }: SiteHe
         >
           {open ? <X className="size-4" /> : <Menu className="size-4" />}
         </button>
+        </div>
       </div>
 
       <div
@@ -73,7 +75,8 @@ export function SiteHeader({ home = false, maxWidthClass = "max-w-6xl" }: SiteHe
           open ? "max-h-80 opacity-100" : "max-h-0 opacity-0",
         )}
       >
-        <nav className={cn("mx-auto flex flex-col gap-1 py-4", maxWidthClass)}>
+        <div className="px-6">
+          <nav className={cn("mx-auto flex flex-col gap-1 py-4", maxWidthClass)}>
           {SECTIONS.map(([label, id], index) => (
             <a
               key={id}
@@ -92,7 +95,8 @@ export function SiteHeader({ home = false, maxWidthClass = "max-w-6xl" }: SiteHe
           >
             Available for work
           </a>
-        </nav>
+          </nav>
+        </div>
       </div>
     </header>
   );
