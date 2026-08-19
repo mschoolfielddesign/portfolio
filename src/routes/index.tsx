@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowUpRight, Linkedin, Mail } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Linkedin, Mail } from "lucide-react";
 import { Reveal, SectionHeading } from "@/components/portfolio/sections";
 import { SiteHeader } from "@/components/portfolio/site-header";
 import PortfolioImage from "@/components/PortfolioImage";
@@ -57,41 +56,6 @@ const CAPABILITIES = [
 
 function Home() {
   const progress = useScrollProgress();
-  const heroRef = useRef<HTMLElement>(null);
-  const heroContentRef = useRef<HTMLDivElement>(null);
-  const [showScrollHint, setShowScrollHint] = useState(false);
-
-  useEffect(() => {
-    const updateScrollHint = () => {
-      const hero = heroRef.current;
-      const content = heroContentRef.current;
-      if (!hero || !content || window.innerWidth < 768) {
-        setShowScrollHint(false);
-        return;
-      }
-
-      const contentBottom = content.getBoundingClientRect().bottom;
-      const whitespace = window.innerHeight - contentBottom;
-      setShowScrollHint(whitespace > 48);
-    };
-
-    updateScrollHint();
-    const raf = window.requestAnimationFrame(updateScrollHint);
-    const observer = new ResizeObserver(updateScrollHint);
-    if (heroRef.current) observer.observe(heroRef.current);
-    if (heroContentRef.current) observer.observe(heroContentRef.current);
-    window.addEventListener("resize", updateScrollHint);
-
-    return () => {
-      window.cancelAnimationFrame(raf);
-      observer.disconnect();
-      window.removeEventListener("resize", updateScrollHint);
-    };
-  }, []);
-
-  const scrollToWork = () => {
-    document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background">
@@ -105,16 +69,14 @@ function Home() {
       {/* Hero */}
       <section
         id="top"
-        ref={heroRef}
-        className="relative flex min-h-[100dvh] flex-col px-6 pt-40 pb-16 md:pt-52 md:pb-20"
+        className="relative min-h-[100dvh] px-6 pt-40 pb-16 md:pt-52 md:pb-20"
       >
         <div className="grid-field pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_50%_0%,black,transparent_72%)]" />
         <div
           className="pointer-events-none absolute -top-24 left-1/2 h-[460px] w-[860px] max-w-[130vw] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
           style={{ background: "var(--gradient-signal)" }}
         />
-        <div className="relative mx-auto w-full max-w-6xl">
-          <div ref={heroContentRef}>
+        <div className="relative mx-auto max-w-6xl">
           <Reveal>
             <span className="mono-label">Portfolio · 2026</span>
           </Reveal>
@@ -160,19 +122,7 @@ function Home() {
               </div>
             ))}
           </Reveal>
-          </div>
         </div>
-
-        {showScrollHint ? (
-          <button
-            type="button"
-            onClick={scrollToWork}
-            aria-label="Scroll to work section"
-            className="scroll-hint absolute bottom-8 left-1/2 z-10 inline-flex -translate-x-1/2 items-center justify-center rounded-full border border-border/70 p-2 text-muted-foreground transition-colors hover:border-signal/40 hover:text-signal"
-          >
-            <ArrowDown className="size-5" strokeWidth={1.75} />
-          </button>
-        ) : null}
       </section>
 
       {/* Work */}
