@@ -255,10 +255,12 @@ function Home() {
         <Reveal className="panel mx-auto max-w-6xl overflow-hidden rounded-3xl px-8 py-16 text-center md:px-16">
           <span className="mono-label">Open to senior / staff IC roles • remote</span>
           <h2 className="mx-auto mt-6 max-w-2xl text-3xl leading-tight md:text-5xl">
-            Hiring for the hardest surface in your product?
+            Send me the hard problem
           </h2>
-          <p className="mx-auto mt-5 max-w-lg text-muted-foreground">
-            Send the messy brief. I'll come back with a systems read and two directions.
+          <p className="mx-auto mt-5 max-w-2xl text-muted-foreground">
+            I specialize in healthcare technology, AI interfaces, and the kind of complex,
+            high-stakes design work that actually changes outcomes. If the brief is messy,
+            that's a good sign.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <ObfuscatedEmailLink
