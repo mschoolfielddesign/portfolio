@@ -90,8 +90,8 @@ function Home() {
           <Reveal delay={160}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
               I'm a product designer who works where healthcare, design systems, and
-              production code meet. Most recently, I designed clinical trial solutions that
-              accelerated life-saving treatments at Medable.
+              production code meet. Recently designing clinical trial solutions that
+              accelerate life-saving treatments at Medable.
             </p>
           </Reveal>
           <Reveal delay={240} className="mt-10 flex flex-wrap items-center gap-4">
