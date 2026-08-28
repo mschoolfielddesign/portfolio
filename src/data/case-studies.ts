@@ -107,7 +107,7 @@ export const CASE_STUDIES: CaseStudy[] = [
 
     headline: "Medable Agent Studio",
     summary:
-      "Designing the industry's first agentic AI platform for clinical development: a no-code environment where sponsors and CROs build, deploy, and scale intelligent agents that automate manual work while maintaining strict regulatory compliance.",
+      "Designed the industry's first agentic AI platform for clinical development: a no-code environment where sponsors and CROs build, deploy, and scale intelligent agents that automate manual work while maintaining strict regulatory compliance.",
     pills: [
       "Production shipped",
       "No-code agent builder",

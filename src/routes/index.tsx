@@ -89,9 +89,9 @@ function Home() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              I'm a product designer working where healthcare, design systems, and
-              production code meet. Currently designing clinical trial solutions that
-              accelerate life-saving treatments at Medable.
+              I'm a product designer who works where healthcare, design systems, and
+              production code meet. Most recently, I designed clinical trial solutions that
+              accelerated life-saving treatments at Medable.
             </p>
           </Reveal>
           <Reveal delay={240} className="mt-10 flex flex-wrap items-center gap-4">
@@ -216,7 +216,7 @@ function Home() {
               index="03"
               label="About"
               title="Designing at the intersection of health, AI, and human need"
-              blurb="Senior Product Designer at Medable, building clinical trial platforms used by top-10 pharma companies and 1M+ patients across 70 countries. My career spans healthcare, restaurant tech, and enterprise AI, which shapes how I approach high-stakes design where experience directly impacts outcomes, and sometimes lives."
+              blurb="Most recently, Senior Product Designer at Medable, where I built clinical trial platforms used by top-10 pharma companies and 1M+ patients across 70 countries. My career spans healthcare, restaurant tech, and enterprise AI, which shapes how I approach high-stakes design where experience directly impacts outcomes, and sometimes lives."
             />
             <Reveal delay={80} className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
               I work embedded with engineering, prototype in Figma and Cursor, and treat the
