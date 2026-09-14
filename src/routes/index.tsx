@@ -132,7 +132,7 @@ function Home() {
             index="01"
             label="The latest"
             title="What I've been working on."
-            blurb="Four in-depth case studies spanning agentic AI platform design, clinical trial design systems, and restaurant product work at Toast."
+            blurb="Five in-depth case studies spanning 0→1 clinical workflows, agentic AI, design systems, and restaurant product work at Toast."
           />
 
           <div className="mt-16 grid gap-6 lg:grid-cols-2">
@@ -153,6 +153,7 @@ function Home() {
                     alt={c.heroImage.alt}
                     width={c.heroImage.width}
                     height={c.heroImage.height}
+                    thumbnail
                     className="rounded-none border-b border-border"
                   />
                   <div className="p-8">

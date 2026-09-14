@@ -1,11 +1,18 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { CaseStudyFigure } from "@/components/portfolio/case-study-figure";
 import { ArrowLeft, Check, Mail, Minus } from "lucide-react";
 import { Reveal, SectionHeading } from "@/components/portfolio/sections";
 import { SiteHeader } from "@/components/portfolio/site-header";
-import PortfolioImage from "@/components/PortfolioImage";
 import { getCaseStudy } from "@/data/case-studies";
 import { useScrollProgress } from "@/hooks/use-reveal";
 import ObfuscatedEmailLink from "@/components/ObfuscatedEmailLink";
+import { cn } from "@/lib/utils";
+
+function statGridClass(count: number) {
+  if (count === 3) return "sm:grid-cols-3";
+  if (count <= 2) return "sm:grid-cols-2";
+  return "sm:grid-cols-2 lg:grid-cols-4";
+}
 
 export const Route = createFileRoute("/work/$slug")({
   loader: ({ params }) => {
@@ -85,28 +92,21 @@ function CaseStudyPage() {
           </Reveal>
 
           <Reveal delay={280} className="panel mt-14 overflow-hidden rounded-3xl p-3 md:p-4">
-            <PortfolioImage
+            <img
               src={study.heroImage.src}
               alt={study.heroImage.alt}
               width={study.heroImage.width}
               height={study.heroImage.height}
               loading="eager"
-              className="rounded-2xl"
+              decoding="async"
+              className="w-full rounded-2xl"
             />
           </Reveal>
 
           {study.heroSecondaryImage ? (
-            <div className="panel mt-6 overflow-hidden rounded-3xl p-3 md:p-4">
-              <img
-                src={study.heroSecondaryImage.src}
-                alt={study.heroSecondaryImage.alt}
-                width={study.heroSecondaryImage.width}
-                height={study.heroSecondaryImage.height}
-                loading="eager"
-                decoding="async"
-                className="w-full rounded-2xl"
-              />
-            </div>
+            <Reveal delay={320} className="panel mt-6 overflow-hidden rounded-3xl p-3 md:p-4">
+              <CaseStudyFigure image={study.heroSecondaryImage} loading="eager" />
+            </Reveal>
           ) : null}
 
           <Reveal delay={120} className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
@@ -160,7 +160,12 @@ function CaseStudyPage() {
 
       {/* Stats */}
       <section className="px-6 py-10">
-        <Reveal className="mx-auto grid max-w-6xl gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal
+          className={cn(
+            "mx-auto grid max-w-6xl gap-px overflow-hidden rounded-2xl border border-border bg-border",
+            statGridClass(study.stats.length),
+          )}
+        >
           {study.stats.map((s) => (
             <div key={s.l} className="bg-surface px-6 py-7">
               <div className="font-display text-3xl text-signal">{s.n}</div>
@@ -184,26 +189,24 @@ function CaseStudyPage() {
               <div className="mt-12 space-y-6">
                 {study.feature.images.map((image) => (
                   <div key={image.src} className="panel overflow-hidden rounded-2xl p-3 md:p-4">
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      width={image.width}
-                      height={image.height}
+                    <CaseStudyFigure
+                      image={image}
                       loading="lazy"
-                      decoding="async"
-                      className="w-full rounded-xl"
+                      imgClassName="w-full rounded-xl"
                     />
                   </div>
                 ))}
               </div>
             ) : study.feature.image ? (
               <Reveal delay={60} className="panel mt-12 overflow-hidden rounded-2xl p-3 md:p-4">
-                <PortfolioImage
+                <img
                   src={study.feature.image.src}
                   alt={study.feature.image.alt}
                   width={study.feature.image.width}
                   height={study.feature.image.height}
-                  className="rounded-xl"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full rounded-xl"
                 />
               </Reveal>
             ) : null}

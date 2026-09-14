@@ -23,6 +23,12 @@ import toastDsButtons from "@/assets/toast-ds-buttons.png";
 import toastDsSpacing from "@/assets/toast-ds-spacing.png";
 import toastDsMarketing from "@/assets/toast-ds-marketing.png";
 import toastDsTpc from "@/assets/toast-ds-tpc.png";
+import caregiverDelegateSignInFlow from "@/assets/caregiver-delegate-sign-in-flow.png";
+import caregiverDelegateSignInFlowFull from "@/assets/caregiver-delegate-sign-in-flow-full.png";
+import caregiverCreateParticipantAddCaregiver from "@/assets/caregiver-create-participant-add-caregiver.png";
+import caregiverCreateParticipantForm from "@/assets/caregiver-create-participant-form.png";
+import caregiverNewParticipantCodes from "@/assets/caregiver-new-participant-codes.png";
+import caregiverParticipantDetailsCaregivers from "@/assets/caregiver-participant-details-caregivers.png";
 
 export type ArtKey = "flow" | "tokens" | "orbit" | "wave";
 
@@ -33,6 +39,12 @@ export type CaseImage = {
   alt: string;
   width: number;
   height: number;
+  /** Higher-resolution asset for the zoom dialog (inline preview uses `src`). */
+  fullSrc?: string;
+  fullWidth?: number;
+  fullHeight?: number;
+  /** Opens a full-size dialog when the image is clicked. */
+  expandable?: boolean;
 };
 
 export type CaseStudy = {
@@ -418,8 +430,194 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
   },
   {
-    slug: "toast-online-ordering",
+    slug: "medable-caregiver-access",
     id: "03",
+    name: "Caregiver Access",
+    kicker: "0→1 workflow · Healthcare",
+    title: "Caregiver Access",
+    body: "Led a 0→1 workflow across sponsor, site, and patient experiences that introduced caregiver participation in trials, unlocking ~$100M in potential new sponsor revenue.",
+    tags: ["0→1", "Healthcare", "Cross-experience"],
+    metric: "~$100M",
+    metricLabel: "revenue potential unlocked",
+    art: "flow",
+    heroImage: {
+      src: caregiverNewParticipantCodes,
+      alt: "New participant record with study and invite codes for participant and caregiver",
+      width: 1440,
+      height: 902,
+    },
+    heroSecondaryImage: {
+      src: caregiverDelegateSignInFlow,
+      alt: "Patient mobile flow from study and invite codes through account creation and caregiver consent",
+      width: 2048,
+      height: 858,
+      fullSrc: caregiverDelegateSignInFlowFull,
+      fullWidth: 7028,
+      fullHeight: 2944,
+      expandable: true,
+    },
+
+    headline: "Caregiver Access",
+    summary:
+      "Led a 0→1 workflow spanning sponsor, site, and patient experiences that introduced caregiver participation in clinical trials, a role that did not exist in the product before, unlocking nearly $100M in potential new revenue from study sponsors.",
+    pills: [
+      "Production shipped",
+      "New role in the data model",
+      "3 experiences unified",
+      "~$100M revenue potential unlocked",
+    ],
+    meta: [
+      {
+        k: "Platform",
+        v: "Sponsor configuration · Site management · Patient experience (iOS, Android, web)",
+      },
+      {
+        k: "Scope",
+        v: "Caregiver data model, consent chain, invite and permissions workflow, cross-experience identity",
+      },
+      { k: "Team", v: "Design, Engineering, Product, Clinical Operations" },
+    ],
+    challenge: {
+      title: "Trials were designed around a single participant. Many patients need a second person in the room.",
+      blurb:
+        "The platform had no concept of a caregiver. For pediatric, elderly, and cognitively impaired populations, someone else often manages medication schedules, reports symptoms, and completes eCOA on the patient's behalf. There was no way to represent that relationship in software.",
+      before: [
+        "No caregiver role existed anywhere in the data model across sponsor, site, or patient experiences",
+        "Sponsors built one-off manual workarounds per study or excluded caregiver-dependent populations from eligibility",
+        "Site staff had no supported way to invite, verify, or manage a caregiver's access to study data",
+        "No internal precedent and no clean external pattern to borrow from; genuinely ambiguous problem space",
+      ],
+      after: [
+        "Configurable caregiver role sponsors can enable per study in the sponsor experience",
+        "Site staff can invite, link, and manage caregiver access in the site experience",
+        "Patient experience supports caregiver-linked accounts with their own consent and permission boundaries",
+        "Studies can include caregiver-dependent populations that were previously blocked entirely",
+      ],
+    },
+    stats: [
+      { n: "0→1", l: "new caregiver role in the product" },
+      { n: "3", l: "experiences unified in one workflow" },
+      { n: "~$100M", l: "potential new sponsor revenue unlocked" },
+    ],
+    process: {
+      heading: "Design process",
+      steps: [
+        {
+          t: "Discovery with ClinOps and sponsors",
+          d: "Generative interviews with ClinOps teams and sponsor stakeholders on how caregiver-dependent studies were handled off-platform, in spreadsheets and manual site processes.",
+          bullets: [
+            "Mapped therapeutic areas that most needed caregiver support: pediatrics, neurology, oncology with cognitive burden",
+            "Catalogued manual workarounds sponsors used to route around the missing capability",
+            "Identified caregiver consent vs patient assent as the crux of the design problem",
+          ],
+        },
+        {
+          t: "Mapping the identity and consent model",
+          d: "Before screen design, defined who a caregiver is relative to a participant: what they can see, act on, and how access is granted, verified, and revoked.",
+          bullets: [
+            "Decision tree for caregiver-only, caregiver-plus-patient, and transition-of-consent scenarios",
+            "Validated against GxP and HIPAA identity-segregation requirements with compliance stakeholders",
+          ],
+        },
+        {
+          t: "Cross-experience workflow design",
+          d: "Designed invite-and-link as one continuous journey: sponsors enable capability in the sponsor experience, site staff issue invites in the site experience, and caregivers complete linking and consent in the patient experience.",
+          bullets: [
+            "Sequenced rollout so each team built against a stable contract",
+            "Defined data ownership per experience given no shared identity layer at the start",
+          ],
+        },
+        {
+          t: "Validation and iteration",
+          d: "Tested invite and consent flows with site coordinators and iterated on permission clarity so caregivers and patients each had a legible view of who could see what.",
+        },
+      ],
+    },
+    improvements: {
+      heading: "Constraints that shaped the work",
+      items: [
+        {
+          t: "Consent chain complexity",
+          d: "Caregiver consent and patient assent are not the same legal instrument. The flow had to hold up under GxP and HIPAA identity-segregation requirements.",
+        },
+        {
+          t: "No unified identity layer",
+          d: "Sponsor, site, and patient experiences did not share one model of who this person is and what they can see. The design had to work across three codebases with different data ownership boundaries.",
+        },
+      ],
+    },
+    feature: {
+      heading: "The caregiver invite and consent flow",
+      blurb:
+        "A site coordinator issues a caregiver invite tied to a specific participant. The caregiver completes identity verification and consent on their own device. Both patient and caregiver end up with a clear, permissioned view of what the caregiver can do on the patient's behalf.",
+      images: [
+        {
+          src: caregiverCreateParticipantAddCaregiver,
+          alt: "Create participant form with option to add a caregiver for site-managed invitation",
+          width: 1024,
+          height: 641,
+        },
+        {
+          src: caregiverCreateParticipantForm,
+          alt: "Create participant flow with caregiver email captured before invite",
+          width: 1024,
+          height: 641,
+        },
+        {
+          src: caregiverNewParticipantCodes,
+          alt: "New participant record with study and invite codes for participant and caregiver",
+          width: 1440,
+          height: 902,
+        },
+        {
+          src: caregiverParticipantDetailsCaregivers,
+          alt: "Participant record Caregivers tab with linked caregiver, invite codes, and site management actions",
+          width: 1446,
+          height: 896,
+        },
+      ],
+      items: [
+        {
+          t: "Sponsor configuration",
+          d: "Sponsors turn caregiver participation on per study and define permission boundaries: what a caregiver can view, complete, or submit on a participant's behalf.",
+        },
+        {
+          t: "Site-managed invitation",
+          d: "Site coordinators invite a caregiver against a specific participant record, with the same rigor as any other study role assignment.",
+        },
+        {
+          t: "Caregiver-linked patient experience",
+          d: "The caregiver completes their own consent and identity verification, then gets a permissioned view scoped to exactly what the sponsor configured.",
+        },
+      ],
+    },
+    impact: {
+      heading: "Impact",
+      blurb:
+        "Caregiver Access made caregiver-dependent populations eligible for trials that previously had to exclude them, with a net-new capability across the platform.",
+      stats: [
+        { n: "~$100M", l: "potential new revenue for study sponsors" },
+        { n: "0→1", l: "role that did not exist in the product before" },
+        { n: "3", l: "experiences unified into one caregiver workflow" },
+      ],
+    },
+    lessons: {
+      heading: "Reflection",
+      items: [
+        {
+          t: "Identity before UI",
+          d: "The hardest part was not the screens; it was the identity model underneath. Getting the consent chain right before design scaled up prevented rework across sponsor, site, and patient experiences.",
+        },
+        {
+          t: "Pull compliance in earlier",
+          d: "The legal distinction between consent and assent reshaped the invite flow after the first pass. I would bring compliance into the decision-tree exercise even earlier next time.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "toast-online-ordering",
+    id: "04",
     name: "Online Ordering",
     kicker: "UX/UI · Restaurant tech",
     title: "Toast Online Ordering",
@@ -559,7 +757,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "toast-design-system",
-    id: "04",
+    id: "05",
     name: "Design System",
     kicker: "Design system · Restaurant tech",
     title: "Toast Design System",
