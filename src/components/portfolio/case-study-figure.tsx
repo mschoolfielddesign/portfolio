@@ -88,7 +88,11 @@ export function CaseStudyFigure({
       height={image.height}
       loading={loading}
       decoding="async"
-      className={cn(imgClassName, expandable && "transition-opacity group-hover:opacity-95")}
+      className={cn(
+        imgClassName,
+        image.lightCanvas && "bg-white",
+        expandable && "transition-opacity group-hover:opacity-95",
+      )}
     />
   );
 

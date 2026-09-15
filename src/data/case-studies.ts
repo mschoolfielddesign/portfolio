@@ -29,6 +29,7 @@ import caregiverCreateParticipantAddCaregiver from "@/assets/caregiver-create-pa
 import caregiverCreateParticipantForm from "@/assets/caregiver-create-participant-form.png";
 import caregiverNewParticipantCodes from "@/assets/caregiver-new-participant-codes.png";
 import caregiverParticipantDetailsCaregivers from "@/assets/caregiver-participant-details-caregivers.png";
+import singleAppHero from "@/assets/single-app-hero.png";
 
 export type ArtKey = "flow" | "tokens" | "orbit" | "wave";
 
@@ -45,6 +46,8 @@ export type CaseImage = {
   fullHeight?: number;
   /** Opens a full-size dialog when the image is clicked. */
   expandable?: boolean;
+  /** Opaque white canvas for light UI screenshots with transparency. */
+  lightCanvas?: boolean;
 };
 
 export type CaseStudy = {
@@ -73,6 +76,7 @@ export type CaseStudy = {
     before: string[];
     after: string[];
   };
+  constraints?: { heading?: string; items: Group[] };
   stats: { n: string; l: string }[];
   feature?: {
     heading: string;
@@ -83,13 +87,15 @@ export type CaseStudy = {
     table?: { columns: string[]; rows: string[][] };
     quote?: { text: string; attribution: string };
   };
-  improvements?: { heading: string; items: Group[] };
+  improvements?: { heading: string; blurb?: string; items: Group[] };
   contributions?: { heading: string; blurb?: string; items: Group[] };
   process?: { heading: string; steps: Group[] };
-  highlights?: { heading: string; items: Group[] };
+  highlights?: { heading: string; blurb?: string; items: Group[] };
   impact?: { heading: string; blurb?: string; stats: { n: string; l: string }[] };
   next?: { heading: string; blurb?: string; items: Group[] };
   lessons?: { heading: string; items: Group[] };
+  /** When true, process renders after Detail instead of before Headline work. */
+  processAfterImprovements?: boolean;
 };
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -99,7 +105,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     name: "Agent Studio",
     kicker: "Agentic AI · Healthcare",
     title: "Medable Agent Studio",
-    body: "Designed Agent Studio, a no-code agentic AI platform that unifies 13+ clinical systems, removes CRA bottlenecks, and ships compliant agents in weeks instead of years.",
+    body: "Contributed to Agent Studio, Medable's no-code agentic AI platform for clinical development, including end-to-end design for the CRA Agent and eTMF Agent.",
     tags: ["0→1", "Agent UX", "Healthcare AI"],
     metric: "50%",
     metricLabel: "faster trial startup",
@@ -112,14 +118,18 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     heroSecondaryImage: {
       src: medableAgentStudioScreens,
-      alt: "Agent Studio interface views including chat, agent library, and visual workflow builder",
-      width: 1024,
-      height: 721,
+      alt: "Agent Studio in dark mode showing chat, agents library, and visual workflow builder",
+      width: 3784,
+      height: 2724,
+      fullSrc: medableAgentStudioScreens,
+      fullWidth: 3784,
+      fullHeight: 2724,
+      expandable: true,
     },
 
     headline: "Medable Agent Studio",
     summary:
-      "Designing the industry's first agentic AI platform for clinical development: a no-code environment where sponsors and CROs build, deploy, and scale intelligent agents that automate manual work while maintaining strict regulatory compliance.",
+      "Contributed design across Medable Agent Studio, the industry's first no-code agentic AI platform for clinical development. Led design for two of its earliest agents, the CRA Agent and the eTMF Agent, applying the platform's trust and compliance components, and extended Nucleus to support agentic patterns along the way.",
     pills: [
       "Production shipped",
       "No-code agent builder",
@@ -128,13 +138,16 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     meta: [
       { k: "Platform", v: "Web application (no-code AI)" },
-      { k: "Scope", v: "Agent builder, monitoring, compliance patterns, template library" },
-      { k: "Team", v: "Design, Engineering and AI" },
+      {
+        k: "Scope",
+        v: "CRA Agent, eTMF Agent, Nucleus agentic components (agent dialogs, confidence indicators, smart suggestions)",
+      },
+      { k: "Team", v: "Design (multiple designers), Engineering, AI" },
     ],
     challenge: {
       title: "Clinical trials have outgrown manual workflows.",
       blurb:
-        "Trials are increasingly complex, but development still relies on manual, sequential processes and fragmented data. White space inefficiency compounds across 13+ platforms, strict compliance requirements that take years to implement, and a 95% failure rate for AI pilots in regulated industries.",
+        "Trials are increasingly complex, but development still relies on manual, sequential processes and fragmented data. White space inefficiency compounds across 13+ platforms, strict compliance requirements that historically took years to implement, and a 95% failure rate for AI pilots in regulated industries.",
       before: [
         "95% of AI pilots fail to reach production in regulated industries",
         "CRAs manually navigate 13+ disconnected clinical systems daily",
@@ -150,14 +163,66 @@ export const CASE_STUDIES: CaseStudy[] = [
         "Configurable autonomy with human-in-the-loop checkpoints",
       ],
     },
+    constraints: {
+      heading: "Constraints that shaped the work",
+      items: [
+        {
+          t: "Trust, not just capability",
+          d: "In a regulated clinical context, an agent that's powerful but unpredictable is worse than no agent at all. Every design decision had to answer how a human verifies an action before it runs.",
+        },
+        {
+          t: "A shared trust framework, applied across different risk profiles",
+          d: "The platform's guardrails, confidence indicators, and human-in-the-loop checkpoints were built to be reused across agents, which meant proving they held up against genuinely different workflows. CRA monitoring and eTMF document handling put different pressure on the same components.",
+        },
+        {
+          t: "No prior internal pattern",
+          d: "Nucleus had components for deterministic clinical workflows, not for latency, uncertainty, and correction. Extending it to support agentic UI (confidence indicators, agent dialogs, smart suggestions) was part of the work, not a given.",
+        },
+      ],
+    },
     stats: [
       { n: "95%", l: "of AI pilots fail to reach production" },
       { n: "13+", l: "systems CRAs must manually navigate" },
       { n: "2 yrs", l: "typical time to build compliant AI" },
       { n: "33%", l: "of CRA time spent on admin tasks" },
     ],
+    process: {
+      heading: "Design process",
+      steps: [
+        {
+          t: "Grounding in where trust breaks down",
+          d: "Worked with ClinOps and compliance stakeholders, alongside the broader design team, to map exactly where human trust in an automated system breaks, against the specific reasons the 95% of AI pilots fail to reach production in regulated settings.",
+          bullets: [
+            "Most failed pilots skip human-in-the-loop checkpoints until late in development, then retrofit them under compliance pressure",
+            "Set a shared design principle with the team up front: every agent action needed a legible, reviewable trail before it shipped, not after",
+          ],
+        },
+        {
+          t: "Designing autonomy as a spectrum, not a toggle",
+          d: "Rather than a binary agent-or-human model, the platform's trust components were designed around configurable autonomy, with human-in-the-loop checkpoints as first-class configuration, not a fallback.",
+          bullets: [
+            "Applied this model to CRA Agent and eTMF Agent: risk-flagging needed a different checkpoint posture than document classification",
+            "Designed guardrail configuration alongside each agent's core workflow so compliance posture is set at build time",
+          ],
+        },
+        {
+          t: "Designing CRA Agent and eTMF Agent within that framework",
+          d: "CRA interviews pointed to 13+ disconnected systems as the biggest daily cost, which shaped CRA Agent's unified data view and proactive risk detection. eTMF Agent centered on classification accuracy where a wrong automated call has direct compliance consequences.",
+          bullets: [
+            "Designed both agents end to end: workflow, UI, and confidence/checkpoint patterns specific to each",
+            "Fed agent dialogs, confidence indicators, and smart suggestions back into Nucleus for reuse by other agents",
+          ],
+        },
+        {
+          t: "Shipping in the repo",
+          d: "Worked directly in Cursor alongside engineering to move from design intent to production component code faster, particularly for agent monitoring, confidence-indicator, and chat interface patterns without an existing Nucleus precedent.",
+        },
+      ],
+    },
     improvements: {
       heading: "Platform capabilities",
+      blurb:
+        "Platform-wide capabilities below reflect the full Agent Studio design and engineering team. CRA Agent and eTMF Agent, detailed in Headline work, are where I owned design end to end.",
       items: [
         {
           t: "No-code agent builder",
@@ -186,9 +251,9 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
     },
     feature: {
-      heading: "Featured agent: CRA Agent",
+      heading: "CRA Agent",
       blurb:
-        "One of the first agents launched on Agent Studio. The CRA Agent removes bottlenecks in clinical research monitoring by unifying data across multiple systems and surfacing insights automatically.",
+        "One of the first agents launched on Agent Studio, and one of the two I was personally responsible for designing end to end. The CRA Agent removes bottlenecks in clinical research monitoring by unifying data across multiple systems and surfacing insights automatically.",
       images: [
         {
           src: medableCraAgentChat,
@@ -210,17 +275,32 @@ export const CASE_STUDIES: CaseStudy[] = [
         },
         {
           t: "Proactive risk detection",
-          d: "Identifies enrollment delays, protocol deviations, and data quality issues in real-time. Surfaces critical insights before they become major problems.",
+          d: "Identifies enrollment delays, protocol deviations, and data quality issues in real-time, with confidence indicators showing how much to trust a given flag before acting on it.",
         },
         {
           t: "Automated report generation",
-          d: "Generates site visit reports, monitoring summaries, and compliance documentation automatically. Reduces CRA administrative burden by 33%.",
+          d: "Generates site visit reports, monitoring summaries, and compliance documentation automatically, with human-in-the-loop review built into the flow. Reduces CRA administrative burden by 33%.",
         },
       ],
-      quote: {
-        text: "The CRA Agent eliminates the white space in my day. Instead of jumping between systems and manually compiling reports, I can focus on what matters: supporting sites and ensuring patient safety.",
-        attribution: "Clinical Research Associate, Top 10 Pharma Sponsor",
-      },
+    },
+    highlights: {
+      heading: "eTMF Agent",
+      blurb:
+        "The second agent I designed end to end, applying the same trust components to a document-classification workflow where accuracy and auditability matter more than speed.",
+      items: [
+        {
+          t: "Automated document classification",
+          d: "Classifies incoming trial master file documents against the required filing structure, reducing manual sorting.",
+        },
+        {
+          t: "Confidence-scored filing decisions",
+          d: "Every classification carries a visible confidence signal; low-confidence cases route to human review instead of being filed automatically.",
+        },
+        {
+          t: "Audit-ready by design",
+          d: "Every agent action is legible and traceable, built to hold up under the same compliance scrutiny as a manual filing process.",
+        },
+      ],
     },
     impact: {
       heading: "Impact and results",
@@ -232,10 +312,20 @@ export const CASE_STUDIES: CaseStudy[] = [
         { n: "13+", l: "systems unified in one platform" },
       ],
     },
+    lessons: {
+      heading: "Reflection",
+      items: [
+        {
+          t: "Two trust profiles, one system",
+          d: "Designing two agents with different trust profiles against the same shared component system is what taught me where the trust model needed to flex. A CRA flagging risk and an eTMF agent classifying documents do not call for the same kind of human double-check, and the confidence-indicator pattern only got good once I had designed it against both. I would loop eTMF compliance stakeholders in even earlier next time, since audit-trail requirements reshaped the classification UI after patterns from CRA Agent did not fully transfer.",
+        },
+      ],
+    },
   },
   {
     slug: "nucleus-design-system",
     id: "02",
+    processAfterImprovements: true,
     name: "Nucleus",
     kicker: "Design system · Healthcare",
     title: "Nucleus Design System",
@@ -284,6 +374,23 @@ export const CASE_STUDIES: CaseStudy[] = [
         "572 pixel-diff baselines in CI across light and dark",
       ],
     },
+    constraints: {
+      heading: "Constraints that shaped the work",
+      items: [
+        {
+          t: "13+ live applications, zero downtime tolerance",
+          d: "Every consuming app had to keep shipping while the token layer under it changed. The work had to stay additive and backward-compatible at every stage, not a rip-and-replace.",
+        },
+        {
+          t: "Regulated product, so looks fixed was not good enough",
+          d: "In a GxP-adjacent context, a visual regression that slips through is not just a bug; it is a potential compliance and data-legibility issue. That is what justified 572 pixel-diff baselines instead of manual review alone.",
+        },
+        {
+          t: "Pre-existing accessibility debt could not block the team",
+          d: "A large volume of a11y issues predated this work. Gating CI on 100% clean axe-core results immediately would have stopped all component shipping, so debt was triaged into a burn-down list instead of an all-or-nothing gate.",
+        },
+      ],
+    },
     stats: [
       { n: "572", l: "visual regression baselines, light and dark" },
       { n: "13+", l: "platform applications consuming Nucleus" },
@@ -298,14 +405,22 @@ export const CASE_STUDIES: CaseStudy[] = [
         {
           src: medableNucleusLightMode,
           alt: "Medable platform in light mode showing chat, agents library, and workflow canvas views",
-          width: 1024,
-          height: 715,
+          width: 3784,
+          height: 2724,
+          fullSrc: medableNucleusLightMode,
+          fullWidth: 3784,
+          fullHeight: 2724,
+          expandable: true,
         },
         {
           src: medableNucleusDarkMode,
           alt: "Medable platform in dark mode showing chat, agents library, and workflow canvas views",
-          width: 1024,
-          height: 721,
+          width: 3784,
+          height: 2724,
+          fullSrc: medableNucleusDarkMode,
+          fullWidth: 3784,
+          fullHeight: 2724,
+          expandable: true,
         },
         {
           src: medableSignIn,
@@ -428,6 +543,25 @@ export const CASE_STUDIES: CaseStudy[] = [
         },
       ],
     },
+    impact: {
+      heading: "Results",
+      blurb:
+        "Automated quality gates and token unification changed how the team ships components across the regulated product suite.",
+      stats: [
+        { n: "572", l: "baselines shipped and passing in CI, light and dark" },
+        { n: "13+", l: "applications on a single token source instead of scattered hardcoded values" },
+        { n: "Automated", l: "regression catching replaces manual screenshot review" },
+      ],
+    },
+    lessons: {
+      heading: "Reflection",
+      items: [
+        {
+          t: "Triaging accessibility debt",
+          d: "The decision to triage pre-existing accessibility debt into a burn-down list, instead of gating CI on a clean slate, is what let this ship without stalling the team. I would socialize the elevation model with engineering earlier next time; it was the right foundation, but landing it before component migration started would have avoided some rework.",
+        },
+      ],
+    },
   },
   {
     slug: "medable-caregiver-access",
@@ -494,6 +628,19 @@ export const CASE_STUDIES: CaseStudy[] = [
         "Studies can include caregiver-dependent populations that were previously blocked entirely",
       ],
     },
+    constraints: {
+      heading: "Constraints that shaped the work",
+      items: [
+        {
+          t: "Consent chain complexity",
+          d: "Caregiver consent and patient assent are not the same legal instrument. The flow had to hold up under GxP and HIPAA identity-segregation requirements.",
+        },
+        {
+          t: "No unified identity layer",
+          d: "Sponsor, site, and patient experiences did not share one model of who this person is and what they can see. The design had to work across three codebases with different data ownership boundaries.",
+        },
+      ],
+    },
     stats: [
       { n: "0→1", l: "new caregiver role in the product" },
       { n: "3", l: "experiences unified in one workflow" },
@@ -530,19 +677,6 @@ export const CASE_STUDIES: CaseStudy[] = [
         {
           t: "Validation and iteration",
           d: "Tested invite and consent flows with site coordinators and iterated on permission clarity so caregivers and patients each had a legible view of who could see what.",
-        },
-      ],
-    },
-    improvements: {
-      heading: "Constraints that shaped the work",
-      items: [
-        {
-          t: "Consent chain complexity",
-          d: "Caregiver consent and patient assent are not the same legal instrument. The flow had to hold up under GxP and HIPAA identity-segregation requirements.",
-        },
-        {
-          t: "No unified identity layer",
-          d: "Sponsor, site, and patient experiences did not share one model of who this person is and what they can see. The design had to work across three codebases with different data ownership boundaries.",
         },
       ],
     },
@@ -616,8 +750,168 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
   },
   {
-    slug: "toast-online-ordering",
+    slug: "medable-single-app",
     id: "04",
+    name: "Single App",
+    kicker: "0→1 redesign · Healthcare",
+    title: "Single App",
+    body: "Led a 0→1 redesign of participant onboarding, consolidating study-specific app versions into one application across iOS, Android, and web and cutting per-study engineering maintenance.",
+    tags: ["0→1", "Healthcare", "Cross-platform"],
+    metric: "N→1",
+    metricLabel: "apps consolidated",
+    art: "orbit",
+    heroImage: {
+      src: singleAppHero,
+      alt: "Unified Medable patient app welcome screen with Enter study code",
+      width: 1024,
+      height: 608,
+    },
+
+    headline: "Single App",
+    summary:
+      "Led a 0→1 redesign of participant onboarding, consolidating study-specific app versions into a single application and designing the end-to-end experience across iOS, Android, and web, cutting the engineering maintenance and testing burden that came with shipping a new app per study.",
+    pills: [
+      "Production shipped",
+      "N apps → 1",
+      "iOS, Android, and web",
+      "Reduced engineering maintenance and QA load",
+    ],
+    meta: [
+      { k: "Platform", v: "Patient app (iOS, Android, web) · Medable for Sites" },
+      {
+        k: "Scope",
+        v: "Onboarding architecture, study and invite code access model, cross-platform React consolidation",
+      },
+      { k: "Team", v: "Design, Engineering, Product" },
+    ],
+    challenge: {
+      title: "Every study shipped its own app. That doesn't scale.",
+      blurb:
+        "Before this redesign, participant access was tied to org- and study-specific app builds. A patient enrolling in one trial downloaded a different app than a patient in another. Every study meant a new build, a new App Store submission, and a new surface for engineering to test and maintain indefinitely.",
+      before: [
+        "Org-specific app versions multiplied with every new study, each requiring its own build, review, and release cycle",
+        "Engineering carried the ongoing burden of testing and maintaining every version in parallel, even for studies that had wrapped",
+        "Patients had to find and download the correct app for their specific trial, an avoidable point of confusion and drop-off before onboarding started",
+        "Site staff had no consistent way to guide participants to the right access point across a growing catalog of app variants",
+      ],
+      after: [
+        "One Medable application in the App Store, for every study",
+        "Participants access their trial with a study code and an invite code issued through Medable for Sites, with no study-specific download required",
+        "A single onboarding flow designed once and shared across the site app and the patient app",
+        "Engineering no longer builds, versions, or tests a new app per study",
+      ],
+    },
+    constraints: {
+      heading: "Constraints that shaped the work",
+      items: [
+        {
+          t: "In-flight trials could not break",
+          d: "The consolidation had to ship without disrupting participants already enrolled in studies running on the old per-study app model.",
+        },
+        {
+          t: "App Store review",
+          d: "Moving from many single-purpose apps to one multi-tenant app changes what the app is from a review standpoint, and the onboarding flow had to hold up under that scrutiny.",
+        },
+        {
+          t: "Security of the code-based access model",
+          d: "Study and invite codes needed to be secure enough to gate access to sensitive trial and health data without becoming a usability barrier for participants who are often not technical.",
+        },
+      ],
+    },
+    stats: [
+      { n: "N→1", l: "org-specific app versions consolidated" },
+      { n: "3", l: "platforms with one consistent onboarding flow" },
+      { n: "Reduced", l: "ongoing engineering maintenance and QA per study" },
+    ],
+    process: {
+      heading: "Design process",
+      steps: [
+        {
+          t: "Audit of the existing app landscape",
+          d: "Catalogued every org-specific app version in market, mapping which onboarding steps were duplicated identically across all of them versus which varied by sponsor or study.",
+          bullets: [
+            "Most onboarding logic was identical across app variants, with sponsor branding as the only meaningfully different layer",
+            "Confirmed with engineering that parallel maintenance and QA scaled linearly with each new study",
+          ],
+        },
+        {
+          t: "Designing the access model",
+          d: "Replaced download the app built for your study with download the one app, then prove you belong to your study, using study and invite codes issued through Medable for Sites.",
+          bullets: [
+            "Worked through how codes are generated, distributed, validated, and expired without adding friction",
+            "Mapped the handoff between site coordinator actions in Medable for Sites and the participant patient app experience",
+          ],
+        },
+        {
+          t: "Cross-platform onboarding redesign",
+          d: "Designed the end-to-end onboarding experience once, then adapted it consistently across iOS, Android, and web, aligned with the shift to a single React codebase.",
+          bullets: [
+            "Standardized the onboarding sequence so it behaves identically regardless of platform",
+            "Worked with engineering on implementation feasibility given the shared React codebase effort",
+          ],
+        },
+        {
+          t: "Validation",
+          d: "Tested the new code-based onboarding with participants unfamiliar with the old model to confirm the two-code entry point did not introduce new confusion in place of app-selection confusion.",
+        },
+      ],
+    },
+    feature: {
+      heading: "Study code + invite code as the new front door",
+      blurb:
+        "Instead of finding and downloading a study-specific app, a participant downloads the one Medable app and enters a study code and invite code issued by their site, collapsing what used to be an app-discovery problem into a simple, secure access step.",
+      images: [
+        {
+          src: caregiverNewParticipantCodes,
+          alt: "Medable for Sites screen where a coordinator shares study and invite codes with a participant",
+          width: 1440,
+          height: 902,
+        },
+        {
+          src: caregiverDelegateSignInFlow,
+          alt: "End-to-end mobile flow from codes through account creation in the unified patient app",
+          width: 2048,
+          height: 858,
+          fullSrc: caregiverDelegateSignInFlowFull,
+          fullWidth: 7028,
+          fullHeight: 2944,
+          expandable: true,
+        },
+      ],
+      items: [
+        {
+          t: "Site-issued access",
+          d: "Site coordinators generate and share study and invite codes directly through Medable for Sites, keeping enrollment control where it belongs.",
+        },
+        {
+          t: "One onboarding flow, every platform",
+          d: "The same onboarding sequence, rebuilt once against the shared React codebase, so iOS, Android, and web no longer drift apart in behavior or maintenance cost.",
+        },
+      ],
+    },
+    impact: {
+      heading: "Impact",
+      blurb:
+        "Consolidating to a single application shifted ongoing cost from N parallel codebases to one shared onboarding architecture.",
+      stats: [
+        { n: "N→1", l: "org-specific app versions consolidated into one Medable application" },
+        { n: "3", l: "platforms with onboarding redesigned as one consistent flow" },
+        { n: "Reduced", l: "engineering maintenance and QA, no new app build per study" },
+      ],
+    },
+    lessons: {
+      heading: "Reflection",
+      items: [
+        {
+          t: "Reframing the problem",
+          d: "The design challenge was not the screens; it was reframing the problem from which app do I need to how do I prove I belong here. That reframe is what let engineering collapse N codebases into one. I would want harder data earlier on how much drop-off the old app-discovery step caused, to make the case for prioritizing this sooner.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "toast-online-ordering",
+    id: "05",
     name: "Online Ordering",
     kicker: "UX/UI · Restaurant tech",
     title: "Toast Online Ordering",
@@ -719,12 +1013,14 @@ export const CASE_STUDIES: CaseStudy[] = [
           alt: "Redesigned modifier screen with photo, header, and mobile-first selectors",
           width: 1024,
           height: 640,
+          lightCanvas: true,
         },
         {
           src: toastOoModsLegacy,
           alt: "Legacy Toast Online Ordering modifier screen with two-column layout",
           width: 1024,
           height: 640,
+          lightCanvas: true,
         },
         {
           src: toastOoCart,
@@ -757,7 +1053,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "toast-design-system",
-    id: "05",
+    id: "06",
     name: "Design System",
     kicker: "Design system · Restaurant tech",
     title: "Toast Design System",

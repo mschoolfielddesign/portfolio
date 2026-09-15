@@ -132,7 +132,7 @@ function Home() {
             index="01"
             label="The latest"
             title="What I've been working on."
-            blurb="Five in-depth case studies spanning 0→1 clinical workflows, agentic AI, design systems, and restaurant product work at Toast."
+            blurb="Six in-depth case studies spanning 0→1 clinical workflows, agentic AI, design systems, and restaurant product work at Toast."
           />
 
           <div className="mt-16 grid gap-6 lg:grid-cols-2">

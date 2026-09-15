@@ -1,4 +1,6 @@
+import { useMemo } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import type { CaseStudy, Group } from "@/data/case-studies";
 import { CaseStudyFigure } from "@/components/portfolio/case-study-figure";
 import { ArrowLeft, Check, Mail, Minus } from "lucide-react";
 import { Reveal, SectionHeading } from "@/components/portfolio/sections";
@@ -12,6 +14,85 @@ function statGridClass(count: number) {
   if (count === 3) return "sm:grid-cols-3";
   if (count <= 2) return "sm:grid-cols-2";
   return "sm:grid-cols-2 lg:grid-cols-4";
+}
+
+function useCaseStudySectionIndices(study: CaseStudy) {
+  return useMemo(() => {
+    let n = 0;
+    const next = () => String(++n).padStart(2, "0");
+    const processEarly =
+      study.process && !study.processAfterImprovements ? next() : null;
+    const feature = study.feature ? next() : null;
+    const highlights = study.highlights ? next() : null;
+    const improvements = study.improvements ? next() : null;
+    const processLate =
+      study.process && study.processAfterImprovements ? next() : null;
+    return {
+      challenge: next(),
+      processEarly,
+      feature,
+      highlights,
+      improvements,
+      processLate,
+      contributions: study.contributions ? next() : null,
+      impact: study.impact ? next() : null,
+      nextSection: study.next ? next() : null,
+      lessons: study.lessons ? next() : null,
+    };
+  }, [study]);
+}
+
+function CaseStudyProcessSection({
+  index,
+  heading,
+  steps,
+}: {
+  index: string;
+  heading: string;
+  steps: Group[];
+}) {
+  return (
+    <section className="px-6 py-20">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading index={index} label="Process" title={heading} />
+        <ol className="mt-12 space-y-4">
+          {steps.map((s, i) => (
+            <Reveal
+              as="li"
+              key={s.t}
+              delay={i * 60}
+              className="panel relative rounded-2xl p-8 transition-colors hover:border-signal/40"
+            >
+              <div className="flex gap-6">
+                <div className="mt-1 hidden size-10 shrink-0 items-center justify-center rounded-full border border-signal/40 font-display text-signal sm:flex">
+                  {i + 1}
+                </div>
+                <div>
+                  <h3 className="font-display text-xl">{s.t}</h3>
+                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                    {s.d}
+                  </p>
+                  {s.bullets ? (
+                    <ul className="mt-4 space-y-2">
+                      {s.bullets.map((b) => (
+                        <li
+                          key={b}
+                          className="flex gap-2 text-sm leading-relaxed text-foreground/75"
+                        >
+                          <span className="text-signal">·</span>
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
 }
 
 export const Route = createFileRoute("/work/$slug")({
@@ -45,6 +126,7 @@ export const Route = createFileRoute("/work/$slug")({
 function CaseStudyPage() {
   const { study } = Route.useLoaderData();
   const progress = useScrollProgress();
+  const section = useCaseStudySectionIndices(study);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background">
@@ -125,7 +207,7 @@ function CaseStudyPage() {
         <section className="px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <SectionHeading
-              index="01"
+              index={section.challenge}
               label="The challenge"
               title={study.challenge.title ?? "Debt that had to be fixed systematically."}
               blurb={study.challenge.blurb}
@@ -154,6 +236,21 @@ function CaseStudyPage() {
                 </ul>
               </Reveal>
             </div>
+            {study.constraints?.items.length ? (
+              <Reveal delay={120} className="mt-12">
+                <h3 className="font-display text-xl">
+                  {study.constraints.heading ?? "Constraints that shaped the work"}
+                </h3>
+                <div className="mt-6 flex flex-col gap-px overflow-hidden rounded-2xl border border-border bg-border">
+                  {study.constraints.items.map((it) => (
+                    <div key={it.t} className="bg-surface p-8 md:p-10">
+                      <h4 className="font-display text-lg leading-snug">{it.t}</h4>
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{it.d}</p>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            ) : null}
           </div>
         </section>
       ) : null}
@@ -175,12 +272,20 @@ function CaseStudyPage() {
         </Reveal>
       </section>
 
+      {study.process && section.processEarly ? (
+        <CaseStudyProcessSection
+          index={section.processEarly}
+          heading={study.process.heading}
+          steps={study.process.steps}
+        />
+      ) : null}
+
       {/* Feature */}
       {study.feature ? (
         <section className="px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <SectionHeading
-              index="02"
+              index={section.feature!}
               label="Headline work"
               title={study.feature.heading}
               blurb={study.feature.blurb}
@@ -271,11 +376,41 @@ function CaseStudyPage() {
         </section>
       ) : null}
 
+      {study.highlights ? (
+        <section className="px-6 py-20">
+          <div className="mx-auto max-w-6xl">
+            <SectionHeading
+              index={section.highlights!}
+              label="Headline work"
+              title={study.highlights.heading}
+              blurb={study.highlights.blurb}
+            />
+            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {study.highlights.items.map((h, i) => (
+                <Reveal
+                  key={h.t}
+                  delay={(i % 3) * 70}
+                  className="panel rounded-2xl p-7 transition-transform duration-500 hover:-translate-y-1"
+                >
+                  <h3 className="font-display text-lg leading-snug">{h.t}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{h.d}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       {/* Improvements */}
       {study.improvements ? (
         <section className="relative px-6 py-20">
           <div className="mx-auto max-w-6xl">
-            <SectionHeading index="03" label="Detail" title={study.improvements.heading} />
+            <SectionHeading
+              index={section.improvements!}
+              label="Detail"
+              title={study.improvements.heading}
+              blurb={study.improvements.blurb}
+            />
             <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
               {study.improvements.items.map((it, i) => (
                 <Reveal key={it.t} delay={(i % 2) * 70} className="bg-surface p-8">
@@ -303,12 +438,20 @@ function CaseStudyPage() {
         </section>
       ) : null}
 
+      {study.process && section.processLate ? (
+        <CaseStudyProcessSection
+          index={section.processLate}
+          heading={study.process.heading}
+          steps={study.process.steps}
+        />
+      ) : null}
+
       {/* Contributions */}
       {study.contributions ? (
         <section className="px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <SectionHeading
-              index="04"
+              index={section.contributions!}
               label="My work"
               title={study.contributions.heading}
               blurb={study.contributions.blurb}
@@ -330,77 +473,12 @@ function CaseStudyPage() {
         </section>
       ) : null}
 
-      {/* Process */}
-      {study.process ? (
-        <section className="px-6 py-20">
-          <div className="mx-auto max-w-6xl">
-            <SectionHeading index="04" label="Process" title={study.process.heading} />
-            <ol className="mt-12 space-y-4">
-              {study.process.steps.map((s, i) => (
-                <Reveal
-                  as="li"
-                  key={s.t}
-                  delay={i * 60}
-                  className="panel relative rounded-2xl p-8 transition-colors hover:border-signal/40"
-                >
-                  <div className="flex gap-6">
-                    <div className="mt-1 hidden size-10 shrink-0 items-center justify-center rounded-full border border-signal/40 font-display text-signal sm:flex">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <h3 className="font-display text-xl">{s.t}</h3>
-                      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                        {s.d}
-                      </p>
-                      {s.bullets ? (
-                        <ul className="mt-4 space-y-2">
-                          {s.bullets.map((b) => (
-                            <li
-                              key={b}
-                              className="flex gap-2 text-sm leading-relaxed text-foreground/75"
-                            >
-                              <span className="text-signal">·</span>
-                              {b}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </section>
-      ) : null}
-
-      {/* Highlights */}
-      {study.highlights ? (
-        <section className="px-6 py-20">
-          <div className="mx-auto max-w-6xl">
-            <SectionHeading index="05" label="Highlights" title={study.highlights.heading} />
-            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {study.highlights.items.map((h, i) => (
-                <Reveal
-                  key={h.t}
-                  delay={(i % 3) * 70}
-                  className="panel rounded-2xl p-7 transition-transform duration-500 hover:-translate-y-1"
-                >
-                  <h3 className="font-display text-lg leading-snug">{h.t}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{h.d}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
       {/* Impact */}
       {study.impact ? (
         <section className="relative px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <SectionHeading
-              index="06"
+              index={section.impact!}
               label="Results"
               title={study.impact.heading}
               blurb={study.impact.blurb}
@@ -422,7 +500,7 @@ function CaseStudyPage() {
         <section className="px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <SectionHeading
-              index="07"
+              index={section.nextSection!}
               label="Roadmap"
               title={study.next.heading}
               blurb={study.next.blurb}
@@ -443,10 +521,25 @@ function CaseStudyPage() {
       {study.lessons ? (
         <section className="relative px-6 py-20">
           <div className="mx-auto max-w-6xl">
-            <SectionHeading index="06" label="Reflection" title={study.lessons.heading} />
-            <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
+            <SectionHeading
+              index={section.lessons!}
+              label="Reflection"
+              title={study.lessons.heading}
+            />
+            <div
+              className={cn(
+                "mt-12 overflow-hidden rounded-2xl border border-border bg-border",
+                study.lessons.items.length === 1
+                  ? "flex flex-col"
+                  : "grid gap-px md:grid-cols-2",
+              )}
+            >
               {study.lessons.items.map((l, i) => (
-                <Reveal key={l.t} delay={(i % 2) * 70} className="bg-surface p-8">
+                <Reveal
+                  key={l.t}
+                  delay={study.lessons!.items.length === 1 ? 0 : (i % 2) * 70}
+                  className="bg-surface p-8 md:p-10"
+                >
                   <h3 className="font-display text-lg">{l.t}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{l.d}</p>
                 </Reveal>
