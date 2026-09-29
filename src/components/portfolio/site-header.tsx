@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const SECTIONS = [
@@ -8,6 +9,9 @@ const SECTIONS = [
   ["Approach", "approach"],
   ["About", "about"],
 ] as const;
+
+const contactLinkClassName =
+  "rounded-full border border-signal/40 px-4 py-1.5 text-xs font-semibold text-signal transition-colors hover:border-signal/50 hover:bg-signal/10";
 
 type SiteHeaderProps = {
   home?: boolean;
@@ -29,43 +33,44 @@ export function SiteHeader({ home = false, maxWidthClass = "max-w-6xl" }: SiteHe
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
       <div className="px-6">
-        <div className={cn("mx-auto flex items-center justify-between py-4", maxWidthClass)}>
-        <Link
-          to="/"
-          className="min-w-0 truncate font-display text-sm font-semibold tracking-tight"
-        >
-          Matt Schoolfield
-          <span className="ml-2 text-signal">/</span>
-          <span className="ml-2 text-muted-foreground">Product Designer</span>
-        </Link>
-
-        <nav className="hidden items-center gap-8 md:flex">
-          {SECTIONS.map(([label, id]) => (
-            <a
-              key={id}
-              href={href(id)}
-              className="mono-label transition-colors hover:text-foreground"
-            >
-              {label}
-            </a>
-          ))}
-          <a
-            href={href("contact")}
-            className="rounded-full border border-signal/40 px-4 py-1.5 text-xs font-semibold text-signal transition-colors hover:bg-signal/10"
+        <div className={cn("mx-auto flex items-center justify-between gap-3 py-4", maxWidthClass)}>
+          <Link
+            to="/"
+            className="min-w-0 truncate font-display text-sm font-semibold tracking-tight"
           >
-            Available for work
-          </a>
-        </nav>
+            Matt Schoolfield
+            <span className="ml-2 text-signal">/</span>
+            <span className="ml-2 text-muted-foreground">Product Designer</span>
+          </Link>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-signal/50 hover:text-signal md:hidden"
-        >
-          {open ? <X className="size-4" /> : <Menu className="size-4" />}
-        </button>
+          <nav className="hidden items-center gap-6 md:flex">
+            {SECTIONS.map(([label, id]) => (
+              <a
+                key={id}
+                href={href(id)}
+                className="mono-label transition-colors hover:text-foreground"
+              >
+                {label}
+              </a>
+            ))}
+            <a href={href("contact")} className={contactLinkClassName}>
+              Available for work
+            </a>
+            <ThemeToggle />
+          </nav>
+
+          <div className="flex shrink-0 items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-signal/50 hover:text-signal"
+            >
+              {open ? <X className="size-4" strokeWidth={2} /> : <Menu className="size-4" strokeWidth={2} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -77,24 +82,24 @@ export function SiteHeader({ home = false, maxWidthClass = "max-w-6xl" }: SiteHe
       >
         <div className="px-6">
           <nav className={cn("mx-auto flex flex-col gap-1 py-4", maxWidthClass)}>
-          {SECTIONS.map(([label, id], index) => (
+            {SECTIONS.map(([label, id], index) => (
+              <a
+                key={id}
+                href={href(id)}
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between rounded-lg px-2 py-3 font-display text-lg text-foreground transition-colors hover:text-signal"
+              >
+                {label}
+                <span className="mono-label text-signal">{String(index + 1).padStart(2, "0")}</span>
+              </a>
+            ))}
             <a
-              key={id}
-              href={href(id)}
+              href={href("contact")}
               onClick={() => setOpen(false)}
-              className="flex items-center justify-between rounded-lg px-2 py-3 font-display text-lg text-foreground transition-colors hover:text-signal"
+              className="mt-3 inline-flex items-center justify-center rounded-full border border-signal/40 px-4 py-3 text-sm font-semibold text-signal transition-colors hover:border-signal/50 hover:bg-signal/10"
             >
-              {label}
-              <span className="mono-label text-signal">{String(index + 1).padStart(2, "0")}</span>
+              Available for work
             </a>
-          ))}
-          <a
-            href={href("contact")}
-            onClick={() => setOpen(false)}
-            className="mt-3 inline-flex items-center justify-center rounded-full border border-signal/40 px-4 py-3 text-sm font-semibold text-signal"
-          >
-            Available for work
-          </a>
           </nav>
         </div>
       </div>

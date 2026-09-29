@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system: "Signal" — dark-only, technical, systems-minded portfolio.
+ * Design system: "Signal" — light and dark, technical, systems-minded portfolio.
  * All colors are oklch tokens. Never hardcode colors in components.
  */
 
@@ -63,6 +63,64 @@
 
 :root {
   --radius: 0.75rem;
+  color-scheme: light;
+
+  --background: oklch(0.985 0.006 250);
+  --foreground: oklch(0.17 0.02 250);
+  --surface: oklch(0.97 0.008 250);
+  --surface-2: oklch(0.955 0.01 250);
+  --card: oklch(0.97 0.008 250);
+  --card-foreground: oklch(0.17 0.02 250);
+  --popover: oklch(0.99 0.004 250);
+  --popover-foreground: oklch(0.17 0.02 250);
+
+  --signal: oklch(0.42 0.15 176);
+  --signal-soft: oklch(0.52 0.12 190);
+  --ember: oklch(0.58 0.16 62);
+
+  --primary: oklch(0.42 0.15 176);
+  --primary-foreground: oklch(0.99 0.002 250);
+  --secondary: oklch(0.94 0.01 250);
+  --secondary-foreground: oklch(0.2 0.02 250);
+  --muted: oklch(0.94 0.008 250);
+  --muted-foreground: oklch(0.48 0.02 250);
+  --accent: oklch(0.92 0.025 200);
+  --accent-foreground: oklch(0.22 0.03 200);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.99 0.01 250);
+  --border: oklch(0.88 0.012 250);
+  --input: oklch(0.88 0.012 250);
+  --ring: oklch(0.42 0.15 176);
+
+  --chart-1: oklch(0.42 0.15 176);
+  --chart-2: oklch(0.58 0.16 62);
+  --chart-3: oklch(0.52 0.13 250);
+  --chart-4: oklch(0.55 0.12 320);
+  --chart-5: oklch(0.5 0.14 140);
+
+  --sidebar: oklch(0.97 0.008 250);
+  --sidebar-foreground: oklch(0.17 0.02 250);
+  --sidebar-primary: oklch(0.42 0.15 176);
+  --sidebar-primary-foreground: oklch(0.99 0.002 250);
+  --sidebar-accent: oklch(0.94 0.01 250);
+  --sidebar-accent-foreground: oklch(0.2 0.02 250);
+  --sidebar-border: oklch(0.88 0.012 250);
+  --sidebar-ring: oklch(0.42 0.15 176);
+
+  --gradient-signal: linear-gradient(
+    135deg,
+    var(--signal) 0%,
+    var(--signal-soft) 55%,
+    var(--ember) 130%
+  );
+  --shadow-lift: 0 24px 60px -30px oklch(0.25 0.02 250 / 0.14);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--signal) 22%, transparent),
+    0 30px 70px -40px color-mix(in oklab, var(--signal) 35%, transparent);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dark {
+  color-scheme: dark;
 
   --background: oklch(0.16 0.014 250);
   --foreground: oklch(0.96 0.006 240);
@@ -106,16 +164,9 @@
   --sidebar-border: oklch(0.3 0.016 250);
   --sidebar-ring: oklch(0.83 0.16 176);
 
-  --gradient-signal: linear-gradient(
-    135deg,
-    var(--signal) 0%,
-    var(--signal-soft) 55%,
-    var(--ember) 130%
-  );
   --shadow-lift: 0 24px 60px -30px oklch(0 0 0 / 0.85);
   --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--signal) 28%, transparent),
     0 30px 70px -40px color-mix(in oklab, var(--signal) 55%, transparent);
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
