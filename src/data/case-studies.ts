@@ -5,6 +5,7 @@ import medableAgentStudioScreens from "@/assets/medable-agent-studio-screens.png
 import medableCraAgentChat from "@/assets/medable-cra-agent-chat.png";
 import medableCraAgentDashboard from "@/assets/medable-cra-agent-dashboard.png";
 import medableDesignSystem from "@/assets/medable-design-system.png";
+import medableUsernameConsent from "@/assets/medable-username-consent.png";
 import medableSignIn from "@/assets/medable-sign-in.png";
 import medableNucleusLightMode from "@/assets/medable-nucleus-light-mode.png";
 import medableNucleusDarkMode from "@/assets/medable-nucleus-dark-mode.png";
@@ -564,8 +565,161 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
   },
   {
-    slug: "medable-caregiver-access",
+    slug: "medable-username-consent-mvp",
     id: "03",
+    name: "Username Consent MVP",
+    kicker: "Enterprise MVP · Healthcare compliance",
+    title: "Username Consent MVP",
+    body: "Led an MVP that unified email and username participant registration in one organization, eliminating dual-ORG setup and unlocking an estimated $18M in revenue impact.",
+    tags: ["0→1", "Compliance", "Platform"],
+    metric: "$18M",
+    metricLabel: "revenue ROI",
+    art: "flow",
+    heroImage: {
+      src: medableUsernameConsent,
+      alt: "Create participant form with email registration and set up account without email consent options",
+      width: 1024,
+      height: 641,
+      lightCanvas: true,
+    },
+
+    headline: "Username Consent MVP",
+    summary:
+      "Led design for an MVP that let sponsors run email-based (PII) and username-based (No-PII) participant registration inside a single organization, replacing a dual-ORG architecture that doubled setup time, inflated compliance risk, and blocked competitive deals.",
+    pills: [
+      "Production shipped",
+      "1 org instead of 2",
+      "Unified consent workflow",
+      "$18M revenue ROI",
+    ],
+    meta: [
+      { k: "Role", v: "Senior Product Designer (MVP lead)" },
+      { k: "Timeline", v: "2023–2024 · 6 months" },
+      { k: "Team", v: "Design, Engineering, Compliance, Product" },
+    ],
+    challenge: {
+      title: "Every study needed two organizations. That was the bottleneck.",
+      blurb:
+        "Medable required sponsors to stand up separate organizations for PII (email) and No-PII (username) participants on the same trial. Study builders duplicated configuration, coordinators saw fragmented registration flows, and sales lost deals to the operational overhead.",
+      before: [
+        "Two organizations per study with duplicated study configuration and 2× setup time",
+        "Fragmented participant registration and consent experiences across identity types",
+        "PII and No-PII data managed in parallel systems, increasing HIPAA and GDPR exposure",
+        "Dual-ORG complexity cited in lost competitive deals and ongoing platform maintenance debt",
+      ],
+      after: [
+        "One organization with configurable email, username, or hybrid registration",
+        "Unified consent workflow that adapts to study identity settings",
+        "Data segregation preserved inside a single ORG through role and boundary patterns",
+        "Backward-compatible path for legacy dual-ORG studies during phased rollout",
+      ],
+    },
+    constraints: {
+      heading: "Constraints that shaped the work",
+      items: [
+        {
+          t: "Backward compatibility",
+          d: "Thousands of in-flight studies on dual-ORG architecture had to keep working while new studies adopted the unified model.",
+        },
+        {
+          t: "Data privacy by design",
+          d: "PII and No-PII could not commingle. Segregation had to be enforceable in UX, not only in backend policy.",
+        },
+        {
+          t: "Regulatory validation",
+          d: "Consent workflow changes required evidence for 21 CFR Part 11 and ICH-GCP, with audit trails study teams could defend.",
+        },
+      ],
+    },
+    stats: [
+      { n: "50%", l: "reduction in study setup time" },
+      { n: "2→1", l: "organizations required per study" },
+      { n: "85%", l: "reduction in configuration errors" },
+    ],
+    process: {
+      heading: "Design process",
+      steps: [
+        {
+          t: "Discovery and system mapping",
+          d: "Mapped registration, consent, and admin flows across sponsor, site, and participant experiences and documented HIPAA, GDPR, and 21 CFR Part 11 requirements with compliance and engineering.",
+          bullets: [
+            "Interviewed study builders, compliance officers, and platform engineers",
+            "Captured technical constraints for backward compatibility and migration",
+          ],
+        },
+        {
+          t: "Stakeholder alignment on MVP scope",
+          d: "Facilitated workshops with Product, Engineering, Compliance, and Sales to sequence MVP touchpoints versus later phases and define success metrics.",
+        },
+        {
+          t: "Workflow design and prototyping",
+          d: "Designed configuration in Study Builder, site-facing create-participant flows, and participant registration for email and username paths.",
+          bullets: [
+            "Prototyped username consent configuration and participant onboarding",
+            "Usability testing with study builders on identity tradeoffs",
+          ],
+        },
+        {
+          t: "Launch and iteration",
+          d: "Partnered through implementation QA, pilot rollout with sponsors, and iteration on edge cases, error handling, and training materials.",
+        },
+      ],
+    },
+    feature: {
+      heading: "Unified identity inside one organization",
+      blurb:
+        "Study builders choose how participants register; sites create participants once; participants see a single consent experience that respects the study's identity model, without standing up a second ORG.",
+      images: [
+        {
+          src: medableUsernameConsent,
+          alt: "Site create participant form showing email registration and username consent options",
+          width: 1024,
+          height: 641,
+          lightCanvas: true,
+        },
+      ],
+      items: [
+        {
+          t: "Flexible identity configuration",
+          d: "Sponsors enable email, username, or both within one organization instead of cloning studies across two ORGs.",
+        },
+        {
+          t: "Unified consent workflow",
+          d: "One registration and consent path that adapts to study settings while keeping PII and No-PII boundaries explicit.",
+        },
+        {
+          t: "Cross-platform patterns",
+          d: "Reusable identity, validation, and consent components propagated across Study Builder, portals, and admin tools.",
+        },
+      ],
+    },
+    impact: {
+      heading: "Impact",
+      blurb:
+        "The MVP removed duplicate ORG setup from the critical path for new studies and gave sales a simpler story for regulated identity models.",
+      stats: [
+        { n: "$18M", l: "estimated revenue ROI from competitive wins and faster setup" },
+        { n: "50%", l: "reduction in study setup time" },
+        { n: "95%", l: "of new studies on unified ORG within six months of launch" },
+      ],
+    },
+    lessons: {
+      heading: "Reflection",
+      items: [
+        {
+          t: "Mental models before mockups",
+          d: "Study builders needed decision support for email versus username consent, not just toggles. Contextual help and guided configuration reduced misconfiguration more than additional screens.",
+        },
+        {
+          t: "Compliance as a design partner",
+          d: "Partnering with Compliance through validation evidence, not at the end of the flow, kept audit-trail requirements from reshaping the UI late in the program.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "medable-caregiver-access",
+    id: "04",
     name: "Caregiver Access",
     kicker: "0→1 workflow · Healthcare",
     title: "Caregiver Access",
@@ -751,7 +905,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "medable-single-app",
-    id: "04",
+    id: "05",
     name: "Single App",
     kicker: "0→1 redesign · Healthcare",
     title: "Single App",
@@ -911,7 +1065,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "toast-online-ordering",
-    id: "05",
+    id: "06",
     name: "Online Ordering",
     kicker: "UX/UI · Restaurant tech",
     title: "Toast Online Ordering",
@@ -1053,7 +1207,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "toast-design-system",
-    id: "06",
+    id: "07",
     name: "Design System",
     kicker: "Design system · Restaurant tech",
     title: "Toast Design System",
